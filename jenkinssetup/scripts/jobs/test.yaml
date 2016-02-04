@@ -1,0 +1,39 @@
+- scm:
+    name: my-scm
+    scm:
+      - git:
+         url: 
+         branches:
+           - origin/master
+         skip-tag: true
+- builder:
+    name: run-docker-echo
+    builders:
+      - shell: 'sudo ./build.sh'
+- job:
+    name: docker_echo_job
+    project-type: freestyle
+    defaults: global
+    description: 'Do not edit this job through the web!'
+    disabled: false
+    display-name: 'demo'
+    concurrent: true
+    workspace: /home/jenkins
+    quiet-period: 5
+    block-downstream: false
+    block-upstream: false
+    retry-count: 3
+    node: jenkinsdockerslave
+    logrotate:
+      daysToKeep: 3
+      numToKeep: 20
+      artifactDaysToKeep: -1
+      artifactNumToKeep: -1
+    builders:
+      - run-docker-echo
+    scm:
+      - my-scm
+    triggers:
+      - github
+      - pollscm:
+          cron: "* * * * *"

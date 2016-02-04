@@ -43,13 +43,12 @@ echo Set up nodes done
 
 echo Uploading jobs
 # Upload jobs using jenkins job builder
-jenkins-jobs update example_simple_job.yaml 
-jenkins-jobs update example_simple_docker_job.yaml
+jenkins-jobs update jobs/test.yaml
 echo Uploading jobs done
 
 # Use xml to upload docker job
-wget -qO- http://jenkins:8080/jnlpJars/jenkins-cli.jar > /scripts/jenkins-cli.jar
-cat /scripts/docker.xml | java -jar /scripts/jenkins-cli.jar -s http://jenkins:8080 create-job 'docker-test'
+#wget -qO- http://jenkins:8080/jnlpJars/jenkins-cli.jar > /scripts/jenkins-cli.jar
+#cat /scripts/jobs/docker.xml | java -jar /scripts/jenkins-cli.jar -s http://jenkins:8080 create-job 'docker-test'
 
 # Sleep forever
 sleep infinity

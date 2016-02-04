@@ -11,7 +11,7 @@ jenkins:
   build: jenkins
   container_name: jenkins
   ports:
-    - "8080:8080"
+    - "8090:8080"
   links:
     - jenkinsslave1
     - jenkinsdockerslave1
